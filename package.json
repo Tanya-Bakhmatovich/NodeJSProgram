@@ -1,0 +1,22 @@
+{
+  "name": "nodejsprogram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "task1": "nodemon task1.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tanya-Bakhmatovich/NodeJSProgram.git"
+  },
+  "author": "Tatsiana Bakhmatovich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tanya-Bakhmatovich/NodeJSProgram/issues"
+  },
+  "homepage": "https://github.com/Tanya-Bakhmatovich/NodeJSProgram#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  }
+}
