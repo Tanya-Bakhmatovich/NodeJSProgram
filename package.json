@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "task1": "nodemon task1.js"
+    "task1": "nodemon task1.js",
+    "task2": "nodemon task2.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "homepage": "https://github.com/Tanya-Bakhmatovich/NodeJSProgram#readme",
   "devDependencies": {
     "nodemon": "^2.0.1"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10"
   }
 }
