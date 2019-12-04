@@ -1,7 +1,8 @@
-const fs = require('fs');
-const csv = require('csvtojson');
+import fs from 'fs';
+import csv from 'csvtojson';
 
-fs.readFileSync('./csv/input_example.csv', 'utf-8');
+(function() {
+    fs.readFileSync('./csv/input_example.csv', 'utf-8');
 
 csv()
 .fromFile('./csv/input_example.csv')
@@ -13,4 +14,6 @@ csv()
     resolve();
   })
 }, (er) => console.error('ERROR', er), () => console.log('success!'))
+})();
+
 
