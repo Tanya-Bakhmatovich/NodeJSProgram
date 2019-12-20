@@ -1,5 +1,6 @@
 function errorResponse(schemaErrors) {
-    const errors = schemaErrors.map((error) => error.message);
+    const errors = schemaErrors.map((error) => error.type.includes('regex') ?
+        `${error.message.split(' ')[0]} should contain at least 1 letter and 1 number` : error.message);
 
     return {
         status: '400',
