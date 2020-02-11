@@ -5,14 +5,13 @@ export default db.define('users', {
     Age: {
         type: Sequelize.STRING
     },
-    Name: {
-        type: Sequelize.STRING
-    },
     Login: {
         type: Sequelize.STRING
     },
     Password: {
         type: Sequelize.STRING
     },
-    CustomId: Sequelize.NUMBER
+    group_id: {
+        type: Sequelize.STRING
+    }
 })

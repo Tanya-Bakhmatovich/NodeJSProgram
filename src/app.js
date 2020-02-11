@@ -1,21 +1,31 @@
   
 import express from 'express';
 import sequelize from './data-access/database';
-import userRouter from './routers/controllers';
+import userRouter from './routers/userControllers';
 import groupRouter from './routers/groupControllers';
 
 import User from './models/User';
 import Group from './models/Group';
-import UserGroup from './models/UserGroup';
-
-
+import { predifinedUsers } from './constants';
+import { createUser, updateUser, f } from './services/usersService';
 
 sequelize.authenticate()
     .then(() => { console.log('Connection has been established successfully.');
-        User.belongsTo(UserGroup);
-        Group.belongsTo(UserGroup);
-        UserGroup.hasMany(User);
-        UserGroup.hasMany(Group);
+        predifinedUsers.forEach(user => {
+            User.findOne({ where: { Login: user.Login }})
+                .then((existedUser) => {
+                    if (existedUser) {
+                        updateUser(user, { Login: user.Login });
+                    } else{
+                        createUser(user);
+                    }
+                })
+        });
+        Group.hasMany(User, { foreignKey: 'group_id' });
+        User.belongsTo(Group, { foreignKey: 'group_id' });
+        
+        // UserGroup.hasMany(User, { foreignKey: 'id'});
+        // UserGroup.hasMany(Group);
     })
     .catch(err => { console.error('Unable to connect to the database:', err);});
 
