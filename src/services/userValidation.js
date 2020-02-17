@@ -6,5 +6,5 @@ export default Joi.object().keys({
     login: Joi.string().regex(pattern).required(),
     password: Joi.string().alphanum().regex(pattern).required(),
     age: Joi.number().min(4).max(120).required(),
-    groupId: Joi.string()
+    group_id: Joi.string()
 });

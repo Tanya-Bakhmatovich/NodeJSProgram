@@ -5,7 +5,8 @@ import userRouter from './routers/userControllers';
 import groupRouter from './routers/groupControllers';
 
 import User from './models/User';
-import Group from './models/Group';
+import { connectTables } from './data-access/tablesConnections';
+
 import { predifinedUsers } from './constants';
 import { createUser, updateUser, f } from './services/usersService';
 
@@ -20,12 +21,9 @@ sequelize.authenticate()
                         createUser(user);
                     }
                 })
-        });
-        Group.hasMany(User, { foreignKey: 'group_id' });
-        User.belongsTo(Group, { foreignKey: 'group_id' });
+        }); 
         
-        // UserGroup.hasMany(User, { foreignKey: 'id'});
-        // UserGroup.hasMany(Group);
+        connectTables();
     })
     .catch(err => { console.error('Unable to connect to the database:', err);});
 
