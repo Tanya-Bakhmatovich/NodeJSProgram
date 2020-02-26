@@ -19,19 +19,21 @@ const logConfiguration = {
 
 const logger = winston.createLogger(logConfiguration);
 
-export const logService = (req, res, next) => {
-    
-    const { method, params, query, body } = req;
-    const args = { method, params, query, body }
-    
-    logger.info(`Service method ${method} has been invoked with arguments: ${Object.keys(args).forEach(key => `${key}: ${args.key}`)}`);
+export const logServiceError = (err, req, res, next) => {  
+    const { method, path, body } = req 
+    if (err) {
+        logger.error(`message: ${err.message}, method: ${method}, path: ${path}, body: ${body}` );
+        res.status(500).send({ error: 'Server error' });
+    }
     next();
 };
 
-export const logError = (err, req, res, next) => {
-
-    console.log('Logger', err);
-    logger.error(err);
-    res.status(500).send({ error: 'Something failed!' });
+export const logService = ( req, res, next) => {   
+    const { method, path, body } = req;
+    logger.info(`Service method ${method} has been invoked with arguments: - body: ${JSON.stringify(Object.keys(body).map(key => ({ [key]: body[key] })))}- path: ${path}`);
     next();
+};
+
+export const logError = (err) => {
+    logger.error(err);
 }
