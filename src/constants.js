@@ -9,4 +9,12 @@ export const predifinedUsers = [
         'Login': 'SvetaLogin',
         'Password': 'jkhefsefdtk7' 
     }   
-]
+];
+
+export const commonPattern = /(?=.*?[0-9])(?=.*?[A-Za-z]).+/;
+
+export const corsOptions = {
+    origin: '*',
+    allowedHeaders: '*',
+    exposedHeaders: '*',
+  };

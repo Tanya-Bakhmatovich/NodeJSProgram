@@ -1,15 +1,18 @@
   
 import express from 'express';
+import cors from 'cors';
 import sequelize from './data-access/database';
 import userRouter from './routers/userControllers';
 import groupRouter from './routers/groupControllers';
+import authRouter from './routers/authController';
 
 import User from './models/User';
 import { connectTables } from './data-access/tablesConnections';
 
-import { predifinedUsers } from './constants';
+import { predifinedUsers, corsOptions } from './constants';
 import { createUser, updateUser } from './services/usersService';
 import { logServiceError, logService, logError } from './services/LogServiceMiddleware';
+import { authMiddleware } from './services/authMiddleware';
 
 sequelize.authenticate()
     .then(() => { console.log('Connection has been established successfully.');
@@ -32,10 +35,16 @@ sequelize.authenticate()
 const app = express();
 const PORT = process.execArgv.PORT || 3000;
 
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use('/', logService);
+
+app.all('/users*', authMiddleware());
+app.all('/groups*', authMiddleware());
+
 app.use('/users', userRouter);
 app.use('/groups', groupRouter);
+app.use('/auth/token', authRouter);
 app.use('/', logServiceError);
 
 process.on('uncaughtException', (err, req, res) => {
