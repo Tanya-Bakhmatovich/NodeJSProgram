@@ -8,9 +8,11 @@ const router = express.Router();
 const validator = createValidator();
 
 router.route('/')
-    .get((req, res) => findAllUsers()
-    .then(users => res.send(users))
-    .catch(err => { throw new Error(err) })
+    .get((req, res) => {
+        findAllUsers()
+            .then(users => res.send(users))
+            .catch(err => { throw new Error(err) })
+    } 
     )
 
     .post(validator.body(validationSchema), (req, res, next) => {
