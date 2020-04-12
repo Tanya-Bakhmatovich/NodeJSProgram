@@ -5,6 +5,7 @@ import sequelize from './data-access/database';
 import userRouter from './routers/userControllers';
 import groupRouter from './routers/groupControllers';
 import authRouter from './routers/authController';
+const dotenv = require('dotenv').config();
 
 import User from './models/User';
 import { connectTables } from './data-access/tablesConnections';
